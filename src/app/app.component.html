@@ -1,0 +1,45 @@
+<div  >
+  <mat-toolbar class="mat-elevation-z9" class="bgi">
+    <mat-icon class="example-icon" >B/S/H</mat-icon>
+   
+    <span class="example-spacer"></span>
+    <a  *ngIf="loggedinn()"><button mat-icon-button [matMenuTriggerFor]="ss" class="example-icon" ><img class="image" src="{{s.photo}}" width="50" height="50"><mat-menu #ss="matMenu" >
+      <mat-card style="background-color: rgb(26, 23, 23);">
+ <img mat-card-image src="{{s.photo}}" alt="Photo of a Shiba Inu"> 
+        <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title><b>Name:</b>{{s.username}}</mat-card-title>
+        <mat-card-subtitle><b>Department:</b>{{s.department}}</mat-card-subtitle>
+        <mat-card-subtitle><b>Mode:</b>{{s.logintype}}</mat-card-subtitle>
+      </mat-card-header>
+      
+  <mat-card-content>  <a class='btn btn-primary' (click)="Logout()" *ngIf="loggedinn()">
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </a></mat-card-content>
+    </mat-card>
+    </mat-menu></button></a>
+    
+  </mat-toolbar>
+</div>
+<mat-sidenav-container  >
+  <mat-sidenav opened mode="side" *ngIf="loggedinn()"  class="navbar navbar-expand-lg navbar" class="sbi">
+    <mat-nav-list>
+      <mat-list role="list" >
+        <mat-list-item role="listitem"  *ngIf="(superadmin()) || (admin())" routerLink='register'>Register</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem"  *ngIf="(superadmin()) || (admin())" routerLink='four'>Add Employee</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem" routerLink='two'>Employee detail</mat-list-item>
+        <mat-divider></mat-divider>
+
+      </mat-list>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="cbi">
+   
+      <router-outlet></router-outlet>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>

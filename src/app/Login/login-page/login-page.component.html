@@ -1,0 +1,22 @@
+
+<mat-card class="text-center border border-light p-5" *ngIf="!loggedinn()" >
+    <p class="h4 mb-4">Login</p>
+    <div class="form-group" [class.has-error]='name.invalid  && name.touched'>
+        <input required maxlength="50" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username"
+            type="text" [(ngModel)]='userName' #name="ngModel">
+        <span class="help-block" style="color: red;" *ngIf='name.invalid  && name.touched'>Username is required</span>
+    </div>
+    <div class="form-group" [class.has-error]='passwordd.invalid  && passwordd.touched'>
+        <input required maxlength="50" type="password" id="defaultLoginFormPassword" class="form-control mb-4"
+            placeholder="Password" [(ngModel)]='passWord' #passwordd='ngModel'>
+        <span class="help-block" style="color: red;" *ngIf='passwordd.invalid  && passwordd.touched'>Password is
+            required</span>
+    </div>
+    <button class="btn btn-secondary" *ngIf="!funvalue" [disabled]="!(name && passwordd).valid " (click)=ValidateUser()> Log in</button>
+    <div class="d-flex justify-content-center" *ngIf="funvalue"> 
+        <div class="spinner-border" role="status"> 
+            <span class="sr-only" id="loading"></span> 
+        </div>
+      </div>
+    <h1>{{status}}</h1>
+</mat-card>

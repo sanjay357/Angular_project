@@ -1,0 +1,54 @@
+
+<div class="container-fluid mt-2 p-5" >
+    <div class="row">
+        <div class="col-5 jumbot ron" style="border-radius: 10px;background-color: rgb(44, 11, 58);" >
+
+<form #f ="ngForm" name ="form" (submit)="onSubmit(f)" style="color: rgb(240, 240, 240);" autocomplete="off"  >
+  <br>
+
+    <div class="form-group" [class.has-error]='username.invalid  && username.touched'> 
+      <label>*Username </label>
+      <input required  [(ngModel)]="loginregister.username" [(ngModel)]="usrname" name="username" type="text" class="form-control" #username="ngModel">
+      <span class="help-block" style="color: red;" *ngIf='username.invalid  && username.touched'>username is required</span>
+    </div>
+    <div class="form-group" [class.has-error]='password.invalid  && password.touched'> 
+      <label>*Password: </label>
+      <input required password name="pwd" [(ngModel)]="loginregister.pwd" [(ngModel)]="pwd"type="text" class="form-control" #password="ngModel">
+<span class="help-block" style="color: red;" *ngIf='password.invalid  && password.touched'>password is required</span> 
+     
+
+    </div>
+    
+      <div class="form-group" >
+        <label class="control-label">Photo source: </label>
+        <input  [(ngModel)]="loginregister.photo"[(ngModel)]="photo" name="photo" type="text" class="form-control" >
+        
+      </div>
+      <div class="form-group" >
+        <label class="control-label">Id: </label>
+        <input  [(ngModel)]="loginregister.id" [(ngModel)]=id name="id" type="number" class="form-control" >
+        
+      </div>
+      <div class="form-group">
+        <label>Department: </label>
+        <input  [(ngModel)]="loginregister.department" [(ngModel)]="department"name="department" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>LoginType: </label>
+        <input  [(ngModel)]="loginregister.logintype" name="logintype" type="text" class="form-control">
+      </div>
+      
+     
+    <button class="but" type="submit" class="btn btn-success"*ngIf="!funvalue">Submit</button>
+    <br>
+    
+    <div class="d-flex justify-content-center" *ngIf="funvalue"> 
+      <div class="spinner-border" role="status"> 
+          <span class="sr-only" id="loading"></span> 
+      </div>
+    </div>
+    {{submit}}
+  </form>
+</div>
+</div>
+</div>

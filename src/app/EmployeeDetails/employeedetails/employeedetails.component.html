@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center" *ngIf="funvalue"> 
+  <div class="spinner-border" role="status"> 
+      <span class="sr-only" id="loading"></span> 
+  </div>
+</div>
+<div   class="card" style="width: 35rem;" *ngIf="!funvalue">
+ 
+  <img class="card-img-top" src="{{employee.srccs}}" alt="Card image cap">
+    <div class="card-body">
+      <h1 class="card-title">{{employee.name | uppercase}}</h1>
+      <p class="card-text">
+          <b>Employee's Id is          :</b> {{employee.id }}
+          <br>
+          <b>Employee's Age is         :</b> {{employee.age}}
+          <br>
+          <b>Employee's Skill is       :</b>{{employee.skill}}
+          
+          <br>
+          <b> Employee's Location is   : </b>{{employee.location}}
+          <br>
+          <b>Employee's PhoneNumber is : </b>{{employee.phoneNumber}}
+          <br>
+          <b>Employee's Salary is      : </b> {{employee.salary}} 
+          <br>
+          <b>Employee's Address is     : </b> {{employee.address}}
+          <br>
+          <b>Employee's Email Id is     : </b> {{employee.email}}
+      </p>
+      <a  class="btn btn-primary" (click)="GoBackToList()">Go Back to List</a>
+      <br>
+      <br>
+      <a  class="btn btn-secondary"  (click)="Delete(employee)">Delete</a>
+    </div>
+  </div>
+
+

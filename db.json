@@ -1,0 +1,118 @@
+{
+  "UserInfo": [
+    {
+      "username": "Sanjay",
+      "password": "kumar",
+      "department": "Mechanical",
+      "photo": "https://www.w3schools.com/w3images/streetart2.jpg",
+      "id": 1
+    },
+    {
+      "username": "Muthu",
+      "password": "kumar",
+      "department": "Mechanical",
+      "photo": "https://www.w3schools.com/w3css/img_5terre.jpg",
+      "id": 2
+    },
+    {
+      "username": "Praveen",
+      "password": "kumar",
+      "department": "Computer science",
+      "photo": "https://www.w3schools.com/w3css/img_snow_wide.jpg",
+      "id": 3
+    }
+  ],
+  "Employeedetails": [
+    {
+      "Name": "Sanjay s",
+      "email": "sanjaykumar@gmail.com",
+      "Age": "30",
+      "id": 1,
+      "Location": "Salem",
+      "srccs": "https://www.w3schools.com/w3images/streetart2.jpg",
+      "PhoneNumber": 9095746231,
+      "Salary": 1000,
+      "Skill": "Web-development",
+      "ManagerName": "Karthi",
+      "Address": "Salem dt"
+    },
+    {
+      "Name": "Vijay R",
+      "email": "vijay@gmail.com",
+      "Age": 19,
+      "id": 2,
+      "Location": "CBE",
+      "srccs": "https://www.w3schools.com/w3css/img_5terre.jpg",
+      "PhoneNumber": 9095746231,
+      "Salary": 1000,
+      "Skill": "Java",
+      "ManagerName": "Karthi",
+      "Address": "Salem dt"
+    },
+    {
+      "Name": "Abi",
+      "email": "abi@gmail.com",
+      "Age": 21,
+      "id": 3,
+      "Location": "Mettupatty",
+      "srccs": "https://www.w3schools.com/w3css/img_workshop.jpg",
+      "PhoneNumber": 9095746231,
+      "Salary": 1000,
+      "Skill": "c",
+      "ManagerName": "Karthi",
+      "Address": "Salem dt"
+    },
+    {
+      "Name": "Apoorva",
+      "email": "apoorva@gmail.com",
+      "Age": 22,
+      "id": 4,
+      "Location": "Palladam",
+      "srccs": "https://www.w3schools.com/w3images/streetart2.jpg",
+      "PhoneNumber": 9095746231,
+      "Salary": 1000,
+      "Skill": "Marketing",
+      "ManagerName": "Karthi",
+      "Address": "Salem dt"
+    },
+    {
+      "Name": "Gowtham",
+      "email": "gowtham@gmail.com",
+      "Age": 25,
+      "id": 5,
+      "Location": "3roads",
+      "srccs": "https://www.w3schools.com/w3css/img_forest.jpg",
+      "PhoneNumber": 9095746231,
+      "Salary": 1000,
+      "Skill": "Manufacturing",
+      "ManagerName": "Karthi",
+      "Address": "Salem dt"
+    },
+    {
+      "Name": "Kathir",
+      "email": "kathir@gmail.comm",
+      "Age": "18",
+      "id": 6,
+      "Location": "Theni",
+      "srccs": "https://www.w3schools.com/w3css/img_lights.jpg",
+      "PhoneNumber": "8886663334",
+      "Salary": "10000",
+      "Skill": "Billing",
+      "ManagerName": "Ranjith",
+      "Address": "Theni Dt."
+    },
+    {
+      "Name": "Kavin",
+      "email": "kavin@gmail.com",
+      "Age": "20",
+      "Location": "Coimbatore",
+      "srccs": "https://www.abc.net.au/cm/rimage/12465498-16x9-xlarge.jpg?v=2",
+      "PhoneNumber": "8889998885",
+      "Salary": "10000",
+      "Skill": "Java",
+      "ManagerName": "Vignesh",
+      "Address": "Coimbatore",
+      "id": 7
+    }
+  ]
+}

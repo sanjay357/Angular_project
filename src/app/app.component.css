@@ -1,0 +1,36 @@
+mat-sidenav-container{
+height: 88.4vh;
+background-color: rgb(200, 229, 255);
+}
+
+.mat-elevation-z5{
+    position: relative;
+    z-index: 2;
+}
+.mat-sidenav mat-list-item:hover{
+    color:red;
+}
+mat-toolbar{
+    background-color: rgb(8, 8, 94);
+}
+mat-sidenav{
+    background-color: rgb(49, 39, 102);
+}
+.image{
+    border-radius: 40vh;
+    margin-bottom: 22px;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+.bgi{
+    background: url('https://www.xmple.com/wallpaper/highlight-purple-linear-gradient-black-1920x1080-c2-000000-4b0082-l-67-a-345-f-21.svg');
+
+}
+.sbi{
+    background: url('https://www.xmple.com/wallpaper/highlight-purple-linear-gradient-black-1920x1080-c2-000000-4b0082-l-67-a-345-f-21.svg');
+}
+.cbi{
+    background: url('https://i.imgur.com/OqH4GUk.jpg');
+}
+

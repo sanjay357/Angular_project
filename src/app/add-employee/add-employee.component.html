@@ -1,0 +1,72 @@
+
+<div class="container-fluid mt-2 p-5" >
+    <div class="row">
+        <div class="col-5 jumbot ron" style="border-radius: 10px;background-color: rgb(44, 11, 58);" >
+
+<form #f ="ngForm" name ="form" (submit)="onSubmit(f)" style="color: rgb(240, 240, 240);" autocomplete="off"  >
+  <br>
+
+    <div class="form-group" [class.has-error]='firstname.invalid  && firstname.touched'> 
+      <label>*FullName: </label>
+      <input required  [(ngModel)]="employee.name" name="name" type="text" class="form-control" #firstname="ngModel">
+      <span class="help-block" style="color: red;" *ngIf='firstname.invalid  && firstname.touched'>Fullname is required</span>
+    </div>
+    <div class="form-group" [class.has-error]='email.invalid  && email.touched'> 
+      <label>*Email: </label>
+      <input required email name="email" [(ngModel)]="employee.email"type="text" class="form-control" #email="ngModel">
+      <span class="help-block" style="color: red;" *ngIf=' email.errors?.required  && email.touched'>Email is required</span>
+      <span class="help-block" style="color: red;" *ngIf=' email.errors?.email  && email.touched'>Email is Invalid</span>
+
+    </div>
+    
+      <div class="form-group" >
+        <label class="control-label">Age: </label>
+        <input  [(ngModel)]="employee.age" name="age" type="number" class="form-control" >
+        
+      </div>
+      <div class="form-group" >
+        <label class="control-label">Id: </label>
+        <input  [(ngModel)]="employee.id" [(ngModel)]="idvalue" name="id" type="number" class="form-control" >
+        
+      </div>
+      <div class="form-group">
+        <label>Location: </label>
+        <input  [(ngModel)]="employee.location" name="location" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Picture Source: </label>
+        <input [(ngModel)]="employee.srccs" name="srccs" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>PhoneNumber: </label>
+        <input [(ngModel)]="employee.phoneNumber" type="number"type="tel" pattern="[0-9]{10}"  name="phoneNumber" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Salary: </label>
+        <input  [(ngModel)]="employee.salary" name="salary" type="number" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Skill: </label>
+        <input  [(ngModel)]="employee.skill" name="skill" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>ManagerName: </label>
+        <input  [(ngModel)]="employee.managerName" name="managerName" type="text" class="form-control">
+      </div>
+      <div class="form-group" [class.has-error]='addresss.invalid  && addresss.touched'>
+        <label>*Address:</label>
+        <input  required [(ngModel)]="employee.address" name="address" type="text" class="form-control" #addresss='ngModel'>
+        <span class="help-block" style="color: red;" *ngIf='addresss.invalid  && addresss.touched'>Address is required</span>
+      </div>
+    <button class="but" type="submit" class="btn btn-success"*ngIf="!funvalue">Submit</button>
+    <br>
+    <div class="d-flex justify-content-center" *ngIf="funvalue"> 
+      <div class="spinner-border" role="status"> 
+          <span class="sr-only" id="loading"></span> 
+      </div>
+    </div>
+    {{submit}}
+  </form>
+</div>
+</div>
+</div>
