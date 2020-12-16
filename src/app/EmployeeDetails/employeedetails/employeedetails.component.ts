@@ -18,19 +18,20 @@ export class EmployeedetailsComponent implements OnInit {
   constructor(private employeeService: LoginServiceService, private activatedRoute: ActivatedRoute, private location: Location,private routes :Router) { }
 
   ngOnInit(): void {
-    this.employeeService.getEmployeesList().subscribe(s=> 
+    
+    this.getEmployee();
+  }
+
+  getEmployee(): void  {
+    const empId = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.employeeService.getEmployeesListbyid(empId).subscribe(s=> 
       {    if(s && this.funvalue) { 
         this.funvalue=false;
     } 
         this.employees = s;
-        this.getEmployee(this.employees);
+        console.log(this.employees)
       } );
-  }
-
-  getEmployee(employeeList: Employeedetails[]): void  {
-    const empId = +this.activatedRoute.snapshot.paramMap.get('id');
-    this.employee = employeeList.find(m=> m.id == empId);
-    console.log(this.employee)
+    
   }
 
   GoBackToList()

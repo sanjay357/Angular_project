@@ -5,26 +5,26 @@
 </div>
 <div   class="card" style="width: 35rem;" *ngIf="!funvalue">
  
-  <img class="card-img-top" src="{{employee.srccs}}" alt="Card image cap">
+  <img class="card-img-top" src="{{employees.srccs}}" alt="Card image cap">
     <div class="card-body">
-      <h1 class="card-title">{{employee.name | uppercase}}</h1>
+      <h1 class="card-title">{{employees.name | uppercase}}</h1>
       <p class="card-text">
-          <b>Employee's Id is          :</b> {{employee.id }}
+          <b>Employee's Id is          :</b> {{employees.id }}
           <br>
-          <b>Employee's Age is         :</b> {{employee.age}}
+          <b>Employee's Age is         :</b> {{employees.age}}
           <br>
-          <b>Employee's Skill is       :</b>{{employee.skill}}
+          <b>Employee's Skill is       :</b>{{employees.skill}}
           
           <br>
-          <b> Employee's Location is   : </b>{{employee.location}}
+          <b> Employee's Location is   : </b>{{employees.location}}
           <br>
-          <b>Employee's PhoneNumber is : </b>{{employee.phoneNumber}}
+          <b>Employee's PhoneNumber is : </b>{{employees.phoneNumber}}
           <br>
-          <b>Employee's Salary is      : </b> {{employee.salary}} 
+          <b>Employee's Salary is      : </b> {{employees.salary}} 
           <br>
-          <b>Employee's Address is     : </b> {{employee.address}}
+          <b>Employee's Address is     : </b> {{employees.address}}
           <br>
-          <b>Employee's Email Id is     : </b> {{employee.email}}
+          <b>Employee's Email Id is     : </b> {{employees.email}}
       </p>
       <a  class="btn btn-primary" (click)="GoBackToList()">Go Back to List</a>
       <br>

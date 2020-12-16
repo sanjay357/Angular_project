@@ -60,7 +60,7 @@ export class AppComponent {
   }
   admin() {
     this.userinfo = JSON.parse(localStorage.getItem('idd'));
-    console.log(this.userinfo);
+   // console.log(this.userinfo);
     if (this.userinfo.logintype == "admin") {
     
       return true;
@@ -70,7 +70,7 @@ export class AppComponent {
   }
   superadmin() {
     this.userinfo = JSON.parse(localStorage.getItem('idd'));
-    console.log(this.userinfo);
+    //console.log(this.userinfo);
     if (this.userinfo.logintype == "superadmin") {
    
       return true;
@@ -82,7 +82,7 @@ export class AppComponent {
 
   jsoncard() {
     this.s = JSON.parse(localStorage.getItem('idd'));
-    console.log(this.s);
+   // console.log(this.s);
 
   }
 

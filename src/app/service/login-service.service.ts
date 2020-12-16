@@ -5,6 +5,7 @@ import { UserInfo } from 'src/app/Login/user-info'
 import { Observable } from 'rxjs';
 import { Employeedetails } from '../EmployeesDetail/employeedetails';
 import { $ } from 'protractor';
+import { EmployeeCollection } from '../employee-collection';
 
 
 @Injectable({
@@ -20,8 +21,12 @@ private readonly url:string='https://localhost:44347/api/Employee';
     {
       return this.http.get<UserInfo[]>('https://localhost:44347/api/Login');
     }
-    getEmployeesList():Observable<Employeedetails[]>{
-      return this.http.get<Employeedetails[]>('https://localhost:44347/api/Employee');
+    getEmployeesList( start,end):Observable<EmployeeCollection>{
+      return this.http.get<EmployeeCollection>('https://localhost:44347/api/Employee?start=' +start +'&end='+end);
+
+    }
+    getEmployeesListbyid(id):Observable<Employeedetails[]>{
+      return this.http.get<Employeedetails[]>(this.baseUrl+ "/" + id);
 
     }
     createlogin(form :UserInfo):Observable<UserInfo>

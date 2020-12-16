@@ -10,5 +10,6 @@ export class Employeedetails {
     skill: string;
     managerName: string;
     email:string;
+    
 }
 

@@ -28,11 +28,11 @@
   <input (keyup)="searchage()" matInput placeholder="Ex.19" [(ngModel)]='age' #input style="height: 7vh;">
 
 </mat-form-field>
-<button class="btn btn-secondary" mat-raised-button (click)=getEmployees() color="warn"
+<button class="btn btn-secondary" mat-raised-button (click)=getEmployees(0,5) color="warn"
   style="background-color: rgb(31, 30, 30);margin-left: 22px;margin-top: 22px;">Reset</button>
 
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" *ngIf="!loading" >
 
   <ng-container matColumnDef="id" class="table">
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="idd"> Employee Id. </th>
@@ -82,11 +82,17 @@
 
 </table>
 
-<div class="d-flex justify-content-center" *ngIf="funvalue"> 
+<div class="d-flex justify-content-center" *ngIf="loading"> 
   <div class="spinner-border" role="status"> 
       <span class="sr-only" id="loading"></span> 
   </div>
 </div>
-<mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
+<mat-paginator 
+[pageSize]="5"
+[pageSizeOptions]="[5, 10, 25, 30,100]"
+[length]="length"
+showFirstLastButtons
+
+(page)="pageChanged($event)">
 </mat-paginator>
-</div>
+

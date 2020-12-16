@@ -29,12 +29,7 @@ export class LoginregisterComponent implements OnInit {
   onSubmit(form: NgForm): void {
     
     if (form.valid ) {
-  //  this.loginvalue.id=+this.id
-  //  this.loginvalue.department=this.department
-  //  this.loginvalue.photo=this.photo;
-  //  this.loginvalue.pwd=this.pwd;
-  //  this.loginvalue.username=this.usrname;
-  //  this.funvalue=true;
+
 console.log(form.value)
       //console.log(form.value)
       console.log(form.value)

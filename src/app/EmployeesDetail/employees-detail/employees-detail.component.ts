@@ -1,24 +1,29 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/service/login-service.service';
 import { Employeedetails } from '../employeedetails';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { from } from 'rxjs';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { AddEmployeeComponent } from 'src/app/add-employee/add-employee.component';
 import { clear } from 'console';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserInfo } from 'src/app/Login/user-info';
+import { EmployeeCollection } from 'src/app/employee-collection';
 
 @Component({
   selector: 'app-employees-detail',
   templateUrl: './employees-detail.component.html',
   styleUrls: ['./employees-detail.component.css']
 })
-export class EmployeesDetailComponent implements OnInit {
-  EmployeeList: Employeedetails[];
+export class EmployeesDetailComponent implements OnInit, AfterViewInit {
+  Employee: Employeedetails[];
+  EmployeeList: EmployeeCollection;
+  length:number;
+  
+  
 
   namee: string;
   Locationn: string;
@@ -26,18 +31,18 @@ export class EmployeesDetailComponent implements OnInit {
   skill: string;
   age: number;
   funvalue: boolean = true;
- 
-
+  loading: boolean = true;
+  start:number;
+  end:number;
 
   Name1: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: String[] = ['id', 'name', 'location', 'skill', 'age', 'options'];
   dataSource: MatTableDataSource<Employeedetails>
+ 
   dataa: any;
   userinfo: UserInfo;
-
-
 
 
   constructor(private routes: Router, private empservice: LoginServiceService, private SpinnerService: NgxSpinnerService) {
@@ -45,52 +50,101 @@ export class EmployeesDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getEmployees();
-    this.dataSource.sort = this.sort;
+   
+    this.getEmployees(0,5);
+    
+    
+   
+  }
+  ngAfterViewInit(){
+     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+}
+  
 
 
 
-  }
-  clearall() {
-    this.idd = null;
-    this.Locationn = '';
-    this.namee = '';
-    this.skill = '';
-    this.age = null;
-  }
-  getEmployees() {
+  //getMethod for table
+  getEmployees(start ,end) {
 
     this.idd = null;
     this.Locationn = '';
     this.namee = '';
     this.skill = '';
     this.age = null;
+    this.loading = true;
+    console.log(PageEvent.length)
+   
+    this.empservice.getEmployeesList(start, end).subscribe(s => {
+      this.loading = false;
+      console.log(s);
+      this.Employee=s.employees;
+      this.length=s.employeeCount;
+      
+      console.log(this.Employee);
+      //this.EmployeeList.length=30;
+      this.dataSource = new MatTableDataSource<Employeedetails>(this.Employee);
+      this.dataa = new MatTableDataSource<Employeedetails>(this.Employee);
+      this.dataSource.sort = this.sort;
+      console.log(this.dataSource.sort)
+      
+      
+      
+       console.log(this.dataSource);
+      
+     
+    })
+    
+    this.reloadfun();
+  }
+  pageChanged(event){
+    this.loading = true;
 
-    this.empservice.getEmployeesList().subscribe(s => {
+    let pageIndex = 1+(event.pageIndex);
+    let pageSize = event.pageSize;
+
+    let previousIndex = event.previousPageIndex;
+
+    let previousSize = pageSize * pageIndex;
+    this.end=pageSize*pageIndex;
+    console.log(this.end)
+    this.start=this.end-pageSize;
+    console.log(this.start);
+
+    this.getNextData(previousSize,this.start,pageSize);
+  }
+  getNextData(previousSize,start, end) {
+    
+
+    this.empservice.getEmployeesList(start,end).subscribe(s => {
+      this.loading = false;
+   console.log(s)
       if (s && this.funvalue) {
         this.hideloader();
       }
-      this.EmployeeList = s;
-      this.dataSource = new MatTableDataSource<Employeedetails>(this.EmployeeList);
-      this.dataa = new MatTableDataSource<Employeedetails>(this.EmployeeList);
-      console.log(this.dataSource);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      this.Employee=s.employees;
+      console.log(this.Employee)
+      this.length=s.employeeCount;
 
-
+      this.dataSource = new MatTableDataSource<Employeedetails>(this.Employee);
+  
+      this.dataa = new MatTableDataSource<Employeedetails>(this.Employee);
+      this.dataSource._updateChangeSubscription();
+     this.dataa._updateChangeSubscription();
+      this.dataSource.sort=this.sort;
+       console.log(this.dataSource.data);
+    
+      
     })
-    this.reloadfun();
-
-
+    
   }
 
 
   admin() {
     this.userinfo = JSON.parse(localStorage.getItem('idd'));
-    console.log(this.userinfo);
+    // console.log(this.userinfo);
     if (this.userinfo.logintype == "admin") {
-    
+
       return true;
     } else {
       return false;
@@ -98,15 +152,15 @@ export class EmployeesDetailComponent implements OnInit {
   }
   superadmin() {
     this.userinfo = JSON.parse(localStorage.getItem('idd'));
-    console.log(this.userinfo);
+    //console.log(this.userinfo);
     if (this.userinfo.logintype == "superadmin") {
-   
+
       return true;
     } else {
       return false;
     }
   }
- 
+
   hideloader() {
 
     // Setting display of spinner 
@@ -117,7 +171,7 @@ export class EmployeesDetailComponent implements OnInit {
     this.age = null;
     this.idd = null
     console.log(this.namee);
-    this.dataa = this.EmployeeList.filter(res => res.name.toLowerCase().match(this.namee.toLowerCase()) && res.location.toLowerCase().match(this.Locationn.toLowerCase()) && res.skill.toLowerCase().match(this.skill.toLowerCase())
+    this.dataa = this.Employee.filter(res => res.name.toLowerCase().match(this.namee.toLowerCase()) && res.location.toLowerCase().match(this.Locationn.toLowerCase()) && res.skill.toLowerCase().match(this.skill.toLowerCase())
     )
     // this.dataa=this.EmployeeList.filter(m=s>m.Name==this.namee && m.Location==this.Locationn)
 
@@ -125,10 +179,7 @@ export class EmployeesDetailComponent implements OnInit {
 
     console.log(this.dataa);
     this.dataSource = this.dataa;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-
+    
   }
   reloadfun() {
     var a = localStorage.getItem('i')
@@ -137,16 +188,7 @@ export class EmployeesDetailComponent implements OnInit {
       localStorage.setItem("i", 'N')
     }
   }
-  // searchlocation(){
-  //   console.log(this.Locationn);
-  //   this.dataa=this.EmployeeList.filter(res=>{
-  //     return res.Location.toLowerCase().match(this.Locationn.toLowerCase()); 
-  //   })
-  //   this.dataSource =this.dataa;
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
+ 
   searchId() {
 
     this.Locationn = '';
@@ -154,13 +196,11 @@ export class EmployeesDetailComponent implements OnInit {
     this.skill = '';
     this.age = null;
     console.log(this.idd);
-    this.dataa = this.EmployeeList.filter(m => {
+    this.dataa = this.Employee.filter(m => {
       return m.id == this.idd;
     })
     this.dataSource = this.dataa;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+   
 
   }
   searchage() {
@@ -170,34 +210,24 @@ export class EmployeesDetailComponent implements OnInit {
     this.skill = '';
 
     console.log(this.age);
-    this.dataa = this.EmployeeList.filter(m => {
+    this.dataa = this.Employee.filter(m => {
       return m.age == this.age;
     })
     this.dataSource = this.dataa;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  //  if (this.dataSource.paginator) {
+  //    this.dataSource.paginator.firstPage();
+  //  }
 
   }
-  // searchSkills(){
-  //   console.log(this.skill);
-  //   this.dataa=this.EmployeeList.filter(m=>{
-  //     return m.Skill.toLowerCase().match(this.skill.toLowerCase()); 
-  //   })
-  //   this.dataSource =this.dataa;
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
 
-  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+   if (this.dataSource.paginator) {
+     this.dataSource.paginator.firstPage();
+   }
   }
 
   public highlightSelectedRow(row): void {
@@ -208,7 +238,7 @@ export class EmployeesDetailComponent implements OnInit {
     if (confirm) {
       this.empservice.deletee(data.id).subscribe(res => {
         console.log(res);
-        this.getEmployees()
+        
         location.reload();
 
       })
